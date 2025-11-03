@@ -1,14 +1,14 @@
 {
-  "name": "로또GO",
-  "short_name": "로또GO",
-  "start_url": "https://pogkr.tistory.com/entry/%EB%A1%9C%EB%98%90-%EB%B2%88%ED%98%B8-%ED%99%95%EC%9D%B8-%EA%B3%BC%EA%B1%B0-1%EB%93%B1-%EB%8B%B9%EC%B2%A8-%EC%9E%90%EB%8F%99-%ED%99%95%EC%9D%B8%EA%B8%B0-%EB%A7%A4%EC%A3%BC-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8",
+  "name": "대박로또",
+  "short_name": "대박로또",
+  "description": "내가 적은 로또번호가 과거에 당첨된 적이 있는지 확인하기",
+  "start_url": "https://subjop.tistory.com/entry/%EB%82%B4%EA%B0%80-%EC%A0%81%EC%9D%80-%EB%A1%9C%EB%98%90%EB%B2%88%ED%98%B8-%EA%B3%BC%EA%B1%B0%EC%97%90-%EB%8B%B9%EC%B2%A8%EB%90%9C%EC%A0%81%EC%9D%B4-%EC%9E%88%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8%EC%A1%B0%ED%9A%8C",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffcc00",
-  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/trotcodi-ui/curiolotto/main/lotto-icon-512x512.png",
+      "src": "https://raw.githubusercontent.com/trotcodi-ui/know/main/lotto-icon2-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로또GO 홈화면 추가</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffcc00">
+  <style>
+    body {
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      background: #fffbe6;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 20px;
+    }
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    button {
+      background: #ffcc00;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #ffd633;
+    }
+    .close {
+      display: inline-block;
+      margin-top: 25px;
+      color: #777;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/trotcodi-ui/curiolotto/main/lotto-icon-512x512.png" alt="로또GO 아이콘">
+    <h1>📱 로또GO 홈화면 추가</h1>
+    <p>홈화면에 추가하고 매주 최신 로또 결과를 빠르게 확인하세요!</p>
+    <button onclick="window.location.href='https://pogkr.tistory.com/entry/%EB%A1%9C%EB%98%90-%EB%B2%88%ED%98%B8-%ED%99%95%EC%9D%B8-%EA%B3%BC%EA%B1%B0-1%EB%93%B1-%EB%8B%B9%EC%B2%A8-%EC%9E%90%EB%8F%99-%ED%99%95%EC%9D%B8%EA%B8%B0-%EB%A7%A4%EC%A3%BC-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8';">
+      로또GO 바로가기
+    </button>
+    <div class="close" onclick="window.close()">닫기</div>
+  </div>
+</body>
+</html>

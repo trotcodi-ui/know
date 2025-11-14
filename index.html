@@ -31,30 +31,27 @@
       box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
     button:hover { background: #ffdb4d; }
-    .info { margin-top: 30px; font-size: 0.9em; color: #777; }
+    .info { margin-top: 30px; font-size: 0.95em; color: #555; line-height: 1.6; }
+    .highlight { color: #d32f2f; font-weight: bold; }
   </style>
 </head>
 <body>
 
   <h1>🎯 대박로또</h1>
-  <p>홈화면에 <b>대박로또</b> 아이콘을 추가해<br>매주 로또 당첨여부를 간편하게 확인하세요!</p>
+  <p>홈화면에 <b>대박로또</b> 아이콘을 추가해<br>매주 로또 당첨 여부를 간편하게 확인하세요!</p>
   
   <button id="installBtn">홈화면에 추가</button>
   
-  <div class="info">※ 아이폰은 사파리에서 공유버튼 → “홈 화면에 추가”를 눌러주세요.</div>
+  <div id="guideText" class="info"></div>
 
   <script>
-    /*
-    ───────────────────────────────────────────────────
-      🔥 수정된 핵심:
-      - 모바일 브라우저에서는 절대 자동 리디렉션 금지
-      - 홈화면(standalone) 실행 때만 자동 이동
-    ───────────────────────────────────────────────────
+    /*  
+    -----------------------------------------------------
+      🔥 홈 화면에서 실행 시 자동 리디렉션
+    -----------------------------------------------------
     */
-
     const redirectURL = "https://subjop.tistory.com/entry/%EB%82%B4%EA%B0%80-%EC%A0%81%EC%9D%80-%EB%A1%9C%EB%98%90%EB%B2%88%ED%98%B8-%EA%B3%BC%EA%B1%B0%EC%97%90-%EB%8B%B9%EC%B2%A8%EB%90%9C%EC%A0%81%EC%9D%B4-%EC%9E%88%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8%EC%A1%B0%ED%9A%8C";
 
-    // 🟡 standalone(홈 화면 아이콘) 실행일 때만 이동
     const isStandalone =
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
@@ -63,9 +60,60 @@
       window.location.href = redirectURL;
     }
 
-    // ---------------------------------------------
-    // PWA 설치 버튼
-    // ---------------------------------------------
+    /*  
+    -----------------------------------------------------
+      🔥 OS / 브라우저 자동 감지 후 안내문 출력
+    -----------------------------------------------------
+    */
+    const ua = navigator.userAgent.toLowerCase();
+    const guideBox = document.getElementById('guideText');
+
+    let guideMessage = "";
+
+    // 아이폰 Safari
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const isSafari = isIOS && !ua.includes("crios") && !ua.includes("fxios");
+
+    // 아이폰 Chrome
+    const isIOSChrome = isIOS && ua.includes("crios");
+
+    // 갤럭시 (Android Chrome)
+    const isAndroid = /android/.test(ua);
+    const isAndroidChrome = isAndroid && ua.includes("chrome");
+
+    if (isSafari) {
+      guideMessage = `
+        📱 <b>아이폰 사파리</b>에서 홈 화면 추가 방법<br><br>
+        1) 아래 중앙의 <span class="highlight">공유 버튼</span>을 누르고<br>
+        2) 아래로 스크롤하여 <span class="highlight">"홈 화면에 추가"</span>를 선택하세요.
+      `;
+    }
+    else if (isIOSChrome) {
+      guideMessage = `
+        📱 <b>아이폰 크롬</b>에서 홈 화면 추가 방법<br><br>
+        1) 오른쪽 상단의 <span class="highlight">공유 버튼(⋮)</span>을 누르고<br>
+        2) 아래로 스크롤하여 <span class="highlight">"홈 화면에 추가"</span>를 선택하세요.
+      `;
+    }
+    else if (isAndroidChrome) {
+      guideMessage = `
+        🤖 <b>갤럭시(Android Chrome)</b>에서는<br>
+        아래 버튼을 누르면 <span class="highlight">바로 홈 화면에 설치</span>됩니다!
+      `;
+    }
+    else {
+      guideMessage = `
+        ℹ️ 홈 화면 추가는 모바일 기기에서만 가능합니다.
+      `;
+    }
+
+    guideBox.innerHTML = guideMessage;
+
+    /*  
+    -----------------------------------------------------
+      🔥 PWA 설치 (Android)
+    -----------------------------------------------------
+    */
     let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
 
@@ -81,7 +129,7 @@
         const { outcome } = await deferredPrompt.userChoice;
         deferredPrompt = null;
       } else {
-        alert("📱 아이폰은 사파리의 공유버튼 → ‘홈 화면에 추가’를 선택하세요!");
+        alert("📱 아이폰의 경우 위 안내문을 참고해 홈 화면에 추가하세요!");
       }
     });
   </script>

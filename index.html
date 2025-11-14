@@ -44,14 +44,28 @@
   <div class="info">※ 아이폰은 사파리에서 공유버튼 → “홈 화면에 추가”를 눌러주세요.</div>
 
   <script>
-    // ✅ 홈화면에서 실행 시 자동으로 블로그 페이지로 이동
+    /*
+    ───────────────────────────────────────────────────
+      🔥 수정된 핵심:
+      - 모바일 브라우저에서는 절대 자동 리디렉션 금지
+      - 홈화면(standalone) 실행 때만 자동 이동
+    ───────────────────────────────────────────────────
+    */
+
     const redirectURL = "https://subjop.tistory.com/entry/%EB%82%B4%EA%B0%80-%EC%A0%81%EC%9D%80-%EB%A1%9C%EB%98%90%EB%B2%88%ED%98%B8-%EA%B3%BC%EA%B1%B0%EC%97%90-%EB%8B%B9%EC%B2%A8%EB%90%9C%EC%A0%81%EC%9D%B4-%EC%9E%88%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8%EC%A1%B0%ED%9A%8C";
 
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+    // 🟡 standalone(홈 화면 아이콘) 실행일 때만 이동
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+
+    if (isStandalone) {
       window.location.href = redirectURL;
     }
 
-    // ✅ PWA 설치 버튼 동작
+    // ---------------------------------------------
+    // PWA 설치 버튼
+    // ---------------------------------------------
     let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
 
@@ -65,12 +79,8 @@
       if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          console.log('PWA 설치 완료');
-        }
         deferredPrompt = null;
       } else {
-        // iOS 안내
         alert("📱 아이폰은 사파리의 공유버튼 → ‘홈 화면에 추가’를 선택하세요!");
       }
     });
